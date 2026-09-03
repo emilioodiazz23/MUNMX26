@@ -6,6 +6,18 @@
     <title>MUNMX 2026 - Modelo de Naciones Unidas</title>
     <link rel="stylesheet" href="css/styles.css">
     <style>
+        /* Estilos Base y Resets */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
         /* Control directo de secciones */
         .section {
             display: none;
@@ -21,9 +33,72 @@
         }
         .logo-onu-rotating {
             max-width: 280px;
+            width: 100%;
             height: auto;
             animation: rotateONUY 12s linear infinite;
             transform-style: preserve-3d;
+        }
+
+        /* BARRA DE NAVEGACIÓN RESPONSIVA */
+        .navbar {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            width: 100%;
+            padding: 10px 15px;
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-onu {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #0056b3;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .nav-link:hover {
+            background: #f1f5f9;
+            color: #0056b3;
         }
 
         /* Ventana Modal de Índice */
@@ -90,6 +165,7 @@
             gap: 16px;
             max-width: 550px;
             margin: 30px auto 0 auto;
+            width: 100%;
         }
         .horario-btn-card {
             background: #ffffff;
@@ -167,6 +243,7 @@
             justify-content: center;
             gap: 15px;
             margin: 25px 0;
+            flex-wrap: wrap;
         }
         .btn-filter-tab {
             background: #f1f5f9;
@@ -248,11 +325,43 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.06);
             text-align: center;
         }
+
+        /* ADAPTACIÓN MÓVIL Y RESPONSIVIDAD (MEDIA QUERIES) */
+        @media (max-width: 768px) {
+            .navbar-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 8px;
+                width: 100%;
+            }
+
+            .nav-link {
+                font-size: 0.85rem;
+                padding: 5px 8px;
+            }
+
+            .logo-onu-rotating {
+                max-width: 180px;
+            }
+
+            .horario-view-container,
+            .munix-card-container,
+            .munday-card {
+                padding: 15px;
+            }
+
+            .iframe-munday-container {
+                height: 450px !important;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Navegación Principal Superior -->
     <nav class="navbar">
         <div class="navbar-content">
             <div class="logo-container" onclick="navegar('inicio')" style="cursor:pointer;">
@@ -271,7 +380,6 @@
         </div>
     </nav>
 
-    <!-- Modal de Índice -->
     <div id="index-modal" class="modal-overlay">
         <div class="modal-content">
             <span class="modal-close" onclick="cerrarIndice()">&times;</span>
@@ -288,26 +396,24 @@
         </div>
     </div>
 
-    <div class="container">
-        <!-- SECCIÓN 1: INICIO -->
+    <div class="container" style="padding: 10px; max-width: 1200px; margin: 0 auto;">
         <section id="inicio" class="section">
-            <div id="landing" class="landing">
+            <div id="landing" class="landing" style="text-align: center; padding: 20px 0;">
                 <div class="landing-content">
                     <h1 class="landing-title">MUNMX 2026</h1>
                     <p class="landing-subtitle">Modelo de Naciones Unidas</p>
                     <p class="landing-description">Raíces al futuro</p>
                     <button class="btn-primary" id="btn-start" onclick="abrirIndice()">MUNMX</button>
                 </div>
-                <div class="landing-background">
+                <div class="landing-background" style="margin-top: 20px;">
                     <img src="ONU.png" alt="Logo ONU" class="logo-onu-rotating">
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 2: HORARIOS -->
         <section id="horarios" class="section">
             <div class="horarios-container">
-                <h2 class="section-title">Horarios</h2>
+                <h2 class="section-title" style="text-align:center;">Horarios</h2>
                 
                 <div id="horarios-lista-main" class="horarios-list-container">
                     <div class="horario-btn-card" onclick="abrirHorario('secretaria')">
@@ -336,19 +442,16 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 3: COMITÉS -->
         <section id="comites" class="section">
             <div id="comites-main" class="comites-container">
-                <h2 class="section-title">Comités MUNMX</h2>
+                <h2 class="section-title" style="text-align:center;">Comités MUNMX</h2>
 
-                <!-- Botones de Filtrado -->
                 <div class="comite-filter-wrapper">
                     <button class="btn-filter-tab active" id="btn-prepa" onclick="filtrarComites('preparatoria')">Preparatoria</button>
                     <button class="btn-filter-tab" id="btn-secu" onclick="filtrarComites('secundaria')">Secundaria</button>
                 </div>
                 
-                <div class="comites-grid">
-                    <!-- PREPARATORIA -->
+                <div class="comites-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                     <div class="comite-card prepa-card">
                         <h3>UNICEF</h3>
                         <p class="comite-code">Preparatoria</p>
@@ -440,7 +543,6 @@
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('Crisis (Prepa)')">Conoce a tu mesa</button>
                     </div>
 
-                    <!-- SECUNDARIA -->
                     <div class="comite-card secu-card" style="display:none;">
                         <h3>UNICEF</h3>
                         <p class="comite-code">Secundaria</p>
@@ -504,7 +606,6 @@
                 </div>
             </div>
 
-            <!-- VISTA DINÁMICA DE LA MESA DIRECTIVA POR COMITÉ -->
             <div id="comite-mesa-detalle" style="display: none; padding: 20px;">
                 <h2 id="mesa-titulo-comite" style="color: #0056b3; margin-bottom: 5px; text-align: center;">Mesa Directiva</h2>
                 <p style="color: #64748b; text-align: center; margin-bottom: 25px;">Integrantes de la mesa a cargo del debate.</p>
@@ -517,93 +618,92 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 4: SECRETARÍA GENERAL -->
         <section id="secretaria" class="section">
             <div class="secretaria-container">
-                <h2 class="section-title">Secretaría General 2026</h2>
+                <h2 class="section-title" style="text-align:center;">Secretaría General 2026</h2>
                 
-                <div class="secretaria-main-image">
-                    <img src="SECGEN.JPG" alt="Secretaría General" class="secretaria-photo">
+                <div class="secretaria-main-image" style="text-align:center; margin-bottom: 20px;">
+                    <img src="SECGEN.JPG" alt="Secretaría General" class="secretaria-photo" style="max-width:100%; height:auto; border-radius:12px;">
                 </div>
 
-                <div class="secretaria-roles-grid">
-                    <div class="role-card">
-                        <img src="IMG_9691.JPG" alt="Secretaría General" class="secretaria-photo">
+                <div class="secretaria-roles-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div class="role-card" style="text-align:center;">
+                        <img src="IMG_9691.JPG" alt="Secretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Secretario General</h3>
                         <p>Tanus Salomon Aguilera</p>
                     </div>
-                    <div class="role-card">
-                        <img src="CAMILA.JPG" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                        <img src="CAMILA.JPG" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Secretaria General</h3>
                         <p>Camila León Gonzaléz</p>
                     </div>
-                    <div class="role-card">
-                        <img src="VICTORIA.JPG" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                        <img src="VICTORIA.JPG" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Secretaria General: Adjunta de Protocolo</h3>
                         <p>Elisa Victoria Hernández Roriguez</p>
                     </div>
-                    <div class="role-card">
-                        <img src="ANDREA.JPG" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                        <img src="ANDREA.JPG" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Vicesecretaria General: Adjunta de protocolo</h3>
                         <p>Andrea Tellería Rojas</p>
                     </div>
-                    <div class="role-card">
-                       <img src="EMMANUUEL.JPG" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                       <img src="EMMANUUEL.JPG" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Secretario General Adjunto de Relaciones Externas</h3>
                         <p>Emmanuel Valdez Hernández</p>
                     </div>
-                    <div class="role-card">
-                        <img src="LUNA1.jpeg" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                        <img src="LUNA1.JPG" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Vicesecretaria General Adjunta de Relaciones Externas</h3>
                         <p>Luna Isabella Ramírez Mejía</p>
                     </div>
-                    <div class="role-card">
-                         <img src="ANTONELLA.JPG" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                         <img src="ANTONELLA.JPG" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Directora de Operaciones</h3>
                         <p>Antonella Melo Martin Del Campo</p>
                     </div>
-                    <div class="role-card">
-                        <img src="REYES.JPG" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                        <img src="REYES.JPG" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Subdirector de Operaciones</h3>
                         <p>Reyes Santiago Samperio Vargas</p>
                     </div>
-                    <div class="role-card">
-                        <img src="FLORENCIA.JPG" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                        <img src="FLORENCIA.JPG" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Directora de Comités</h3>
                         <p>Florencia Azul Monrroy Espinoza</p>
                     </div>
-                    <div class="role-card">
-                        <img src="FABIAN.JPG" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                        <img src="FABIAN.JPG" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Subdirector de Comités</h3>
                         <p>Iker Fabián García Garnica</p>
                     </div>
-                    <div class="role-card">
-                        <img src="INES.JPG" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                        <img src="INES.JPG" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Secretaria General Adjunta de Relaciones Internas</h3>
                         <p>Inés Mandujano Cruz</p>
                     </div>
-                    <div class="role-card">
-                        <img src="ISABELLA.JPG" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                        <img src="ISABELLA.JPG" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Secretaria General adjunta de Prensa</h3>
                         <p>Isabella Noble Otamendi</p>
                     </div>
-                    <div class="role-card">
-                        <img src="VANESSA.JPG" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                        <img src="VANESSA.JPG" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Vicesecretaria General adjunta de Prensa</h3>
                         <p>Vanessa Badillo Eulogio</p>
                     </div>
-                    <div class="role-card">
-                         <img src="JACS.JPG" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                         <img src="JACS.JPG" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Jefe de Cascos Azules</h3>
                         <p>Jacs Gabriel Cruz Murguía</p>
                     </div>
-                    <div class="role-card">
-                      <img src="EMILIO1.jpg" alt="Vicesecretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                      <img src="EMILIO1.jpg" alt="Vicesecretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Subjefe de Cascos Azules</h3>
                         <p>Emilio Santiago Díaz Ángeles</p>
                     </div>
-                    <div class="role-card">
-                        <img src="IMG_9691.JPG" alt="Secretaría General" class="secretaria-photo">
+                    <div class="role-card" style="text-align:center;">
+                        <img src="IMG_9691.JPG" alt="Secretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:12px;">
                         <h3>Organizador de MUNMX</h3>
                         <p>Oscar Eduardo Pérez Hernández</p>
                     </div>
@@ -611,61 +711,60 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 5: GALERÍA -->
         <section id="galeria" class="section">
             <div class="gallery-container">
-                <h2 class="gallery-title">Galería MUN</h2>
-                <p class="gallery-subtitle">Conoce momentos destacados de MUNMX</p>
+                <h2 class="gallery-title" style="text-align:center;">Galería MUN</h2>
+                <p class="gallery-subtitle" style="text-align:center;">Conoce momentos destacados de MUNMX</p>
                 
-                <div class="gallery-grid">
+                <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
                     <div class="gallery-item">
-                        <div class="gallery-image"><img src="1.jpeg" alt="Secretaría General" class="secretaria-photo"></div>
+                        <div class="gallery-image"><img src="1.jpeg" alt="Secretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:8px;"></div>
                         <h3>Secretaria General 2026</h3>
                         <p>Quién conforma el modelo</p>
                     </div>
                     <div class="gallery-item">
-                        <div class="gallery-image"><img src="2.jpeg" alt="Secretaría General" class="secretaria-photo"></div>
+                        <div class="gallery-image"><img src="2.jpeg" alt="Secretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:8px;"></div>
                         <h3>MUN Night 2025</h3>
                         <p>La noche más esperada del modelo</p>
                     </div>
                     <div class="gallery-item">
-                        <div class="gallery-image"><img src="11.jpeg" alt="Secretaría General" class="secretaria-photo"></div>
+                        <div class="gallery-image"><img src="11.jpeg" alt="Secretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:8px;"></div>
                         <h3>Delegados Destacados</h3>
                         <p>No solo destacan por sus argumentos, tambien por su liderazgo</p>
                     </div>
                     <div class="gallery-item">
-                        <div class="gallery-image"><img src="4.jpeg" alt="Secretaría General" class="secretaria-photo"></div>
+                        <div class="gallery-image"><img src="4.jpeg" alt="Secretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:8px;"></div>
                         <h3>Secretaría General 2025</h3>
                         <p>Conoce nuestras raíces</p>
                     </div>
                     <div class="gallery-item">
-                        <div class="gallery-image"><img src="5.jpeg" alt="MUN Night" class="secretaria-photo"></div>
+                        <div class="gallery-image"><img src="5.jpeg" alt="MUN Night" class="secretaria-photo" style="width:100%; height:auto; border-radius:8px;"></div>
                         <h3>Mesas Destacadas</h3>
                         <p>Conoce las mesas que nos representan</p>
                     </div>
                     <div class="gallery-item">
-                        <div class="gallery-image"><img src="6.jpeg" alt="Clausura" class="secretaria-photo"></div>
+                        <div class="gallery-image"><img src="6.jpeg" alt="Clausura" class="secretaria-photo" style="width:100%; height:auto; border-radius:8px;"></div>
                         <h3>Crisis 2025</h3>
                         <p>Conoce los retos a los que afrontamos</p>
                     </div>
                     <div class="gallery-item">
-                        <div class="gallery-image"><img src="7.jpeg" alt="Secretaría General" class="secretaria-photo"></div>
+                        <div class="gallery-image"><img src="7.jpeg" alt="Secretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:8px;"></div>
                         <h3>Comité de UNESCO</h3>
                         <p>La base de todo debate son la busqueda de un cambio</p>
                     </div>
                     <div class="gallery-item">
-                        <div class="gallery-image"><img src="8.jpeg" alt="Secretaría General" class="secretaria-photo"></div>
+                        <div class="gallery-image"><img src="8.jpeg" alt="Secretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:8px;"></div>
                         <h3>Día MUN 2026</h3>
                         <p>Lo que se vivío en un día memorable</p>
                     </div>
                     <div class="gallery-item">
-                        <div class="gallery-image"><img src="9.jpeg" alt="Secretaría General" class="secretaria-photo"></div>
+                        <div class="gallery-image"><img src="9.jpeg" alt="Secretaría General" class="secretaria-photo" style="width:100%; height:auto; border-radius:8px;"></div>
                         <h3>Delegado Destacado</h3>
                         <p>Si lo puedes soñar lo puedes lograr</p>
                     </div>
                 </div>
 
-                <div class="gallery-buttons">
+                <div class="gallery-buttons" style="display:flex; justify-content:center; gap:15px; margin-top:25px; flex-wrap:wrap;">
                     <a href="documentos/guia-redaccion.pdf" download="Guia_Redaccion_MUNMX.pdf" class="btn-gallery" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
                         <span class="btn-icon">📄</span> Guía de Redacción
                     </a>
@@ -677,10 +776,9 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 6: MUNix -->
         <section id="personaje" class="section">
             <div class="personaje-container">
-                <h2 class="section-title">Conoce a MUNix</h2>
+                <h2 class="section-title" style="text-align:center;">Conoce a MUNix</h2>
 
                 <div class="munix-card-container" style="display: flex; align-items: center; justify-content: space-between; gap: 30px; background: #ffffff; border-radius: 20px; padding: 30px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; flex-wrap: wrap;">
                     <div class="munix-text-side" style="flex: 1; min-width: 280px; background: #ffffff; font-size: 1.1rem; line-height: 1.6;">
@@ -688,20 +786,19 @@
                         <p><strong style="font-size: 1.15rem;">¿Quién es MUNix?</strong></p>
                         <p>MUNix es un pequeño guardián nacido del encuentro entre las raíces de Hidalgo, los valores de las Naciones Unidas y el liderazgo de las juventudes que participan en MUNMx Campus Hidalgo. Su misión es acompañar a los delegados en su camino hacia la excelencia, recordándoles que cada paso que dan en el modelo es un paso hacia un mundo mejor.</p>
                     </div>
-                    <div class="munix-image-side" style="flex: 0 0 320px; background: #ffffff; text-align: center;">
+                    <div class="munix-image-side" style="flex: 0 0 320px; max-width: 100%; background: #ffffff; text-align: center;">
                         <img src="Masc.png" alt="Mascota MUNix" style="width: 100%; max-width: 320px; height: auto; display: block; margin: 0 auto;">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 7: MunDay -->
         <section id="MunDay" class="section">
             <div class="munday-container" style="padding: 10px 0; width: 100%;">
-                <h2 class="section-title">MunDay</h2>
+                <h2 class="section-title" style="text-align:center;">MunDay</h2>
 
                 <div class="munday-card" style="width: 100%; max-width: 1200px; margin: 0 auto; background: #ffffff; border-radius: 16px; padding: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); box-sizing: border-box;">
-                    <div style="width: 100%; height: 750px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; background: #f8fafc;">
+                    <div class="iframe-munday-container" style="width: 100%; height: 750px; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; background: #f8fafc;">
                         <iframe 
                             src="https://drive.google.com/embeddedfolderview?id=1tKrrU8zF-WOOGIZxXPHbRT-Hv_exHoar#grid" 
                             title="Vista Previa Google Drive MunDay" 
@@ -720,7 +817,6 @@
         </section>
     </div>
 
-    <!-- SCRIPT COMPLETO CON MESAS INDIVIDUALES POR COMITÉ -->
     <script>
         const seccionesIds = ['inicio', 'horarios', 'comites', 'secretaria', 'galeria', 'personaje', 'MunDay'];
 
