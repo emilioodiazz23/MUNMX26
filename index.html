@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="css/styles.css">
     <style>
         /* Estilos Base y Resets */
+        html {
+            scroll-behavior: smooth;
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -16,6 +20,7 @@
             padding: 0;
             overflow-x: hidden;
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f8fafc;
         }
 
         /* Control directo de secciones */
@@ -39,7 +44,7 @@
             transform-style: preserve-3d;
         }
 
-        /* BARRA DE NAVEGACIÓN RESPONSIVA */
+        
         .navbar {
             background-color: #ffffff;
             border-bottom: 1px solid #e2e8f0;
@@ -101,7 +106,7 @@
             color: #0056b3;
         }
 
-        /* Ventana Modal de Índice */
+        
         .modal-overlay {
             display: none;
             position: fixed;
@@ -158,7 +163,7 @@
             color: #ffffff;
         }
 
-        /* Botones Profesionales de Horarios */
+       
         .horarios-list-container {
             display: flex;
             flex-direction: column;
@@ -208,16 +213,19 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.06);
         }
         .horario-img-container {
-            background: #f8fafc;
-            padding: 15px;
-            border-radius: 12px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 16px;
             border: 1px solid #e2e8f0;
             margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
         }
         .horario-img-container img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
+            display: block;
+            margin: 0 auto;
         }
 
         .btn-volver-horario {
@@ -237,7 +245,7 @@
             background: #003d80;
         }
 
-        /* Estilos de Filtro Elegante para Comités */
+       
         .comite-filter-wrapper {
             display: flex;
             justify-content: center;
@@ -268,40 +276,61 @@
             box-shadow: 0 4px 12px rgba(0,86,179,0.25);
         }
 
-        /* Optimization Mesa Directiva */
-        .mesa-roles-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
-        }
-        .mesa-member-card {
-            background: #f8fafc;
-            border: 1px solid #edf2f7;
-            border-radius: 12px;
-            padding: 15px;
+        
+        .mesa-banner-container {
             text-align: center;
+            margin-bottom: 25px;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
-        .mesa-member-card img {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 10px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-        }
-        .mesa-member-card h4 {
-            margin: 4px 0;
-            color: #0056b3;
-            font-size: 0.95rem;
-        }
-        .mesa-member-card p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: #64748b;
+        .mesa-main-photo {
+            max-width: 100%;
+            max-height: 420px;
+            width: auto;
+            border-radius: 12px;
+            object-fit: contain;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        /* MUNix: Fondo Blanco */
+        
+        .mesa-names-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .mesa-name-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid #0056b3;
+            border-radius: 10px;
+            padding: 18px 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .mesa-name-card h4 {
+            margin: 0 0 6px 0;
+            color: #0056b3;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+        .mesa-name-card p {
+            margin: 0;
+            font-size: 0.98rem;
+            color: #334155;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        
         .munix-card-container {
             background: #ffffff;
             border-radius: 20px;
@@ -315,7 +344,7 @@
             padding: 15px;
         }
 
-        /* MunDay */
+        
         .munday-card {
             max-width: 900px;
             margin: 0 auto;
@@ -326,8 +355,12 @@
             text-align: center;
         }
 
-        /* ADAPTACIÓN MÓVIL Y RESPONSIVIDAD (MEDIA QUERIES) */
-        @media (max-width: 768px) {
+       
+        @media (max-width: 600px) {
+            .mesa-names-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
             .navbar-content {
                 flex-direction: column;
                 align-items: center;
@@ -411,32 +444,53 @@
             </div>
         </section>
 
+      
         <section id="horarios" class="section">
             <div class="horarios-container">
                 <h2 class="section-title" style="text-align:center;">Horarios</h2>
                 
-                <div id="horarios-lista-main" class="horarios-list-container">
-                    <div class="horario-btn-card" onclick="abrirHorario('secretaria')">
-                        <h3>Secretaría General</h3>
+                <!-- Nivel 1: Selección de Sección (Secundaria vs Preparatoria) -->
+                <div id="horarios-secciones-main" class="horarios-list-container">
+                    <div class="horario-btn-card" onclick="seleccionarSubramaHorario('secundaria')">
+                        <h3>Secundaria</h3>
                         <span class="arrow-icon">&#8594;</span>
                     </div>
-                    <div class="horario-btn-card" onclick="abrirHorario('mesa')">
-                        <h3>Mesas Directivas</h3>
-                        <span class="arrow-icon">&#8594;</span>
-                    </div>
-                    <div class="horario-btn-card" onclick="abrirHorario('delegados')">
-                        <h3>Delegados</h3>
+                    <div class="horario-btn-card" onclick="seleccionarSubramaHorario('preparatoria')">
+                        <h3>Preparatoria</h3>
                         <span class="arrow-icon">&#8594;</span>
                     </div>
                 </div>
 
+                <!-- Nivel 2: Índice Día 1, Día 2, Día 3 -->
+                <div id="horarios-dias-index" class="horarios-list-container" style="display: none;">
+                    <h3 id="horario-subrama-titulo" style="text-align: center; color: #0056b3; margin-bottom: 10px;"></h3>
+                    <div class="horario-btn-card" onclick="mostrarImagenHorario(1)">
+                        <h3>Día 1</h3>
+                        <span class="arrow-icon">&#8594;</span>
+                    </div>
+                    <div class="horario-btn-card" onclick="mostrarImagenHorario(2)">
+                        <h3>Día 2</h3>
+                        <span class="arrow-icon">&#8594;</span>
+                    </div>
+                    <div class="horario-btn-card" onclick="mostrarImagenHorario(3)">
+                        <h3>Día 3</h3>
+                        <span class="arrow-icon">&#8594;</span>
+                    </div>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button class="btn-volver-horario" onclick="volverASeccionesHorario()">
+                            <span>&#8592;</span> Volver a Categorías
+                        </button>
+                    </div>
+                </div>
+
+            
                 <div id="horario-detalle-view" class="horario-view-container">
                     <h3 id="horario-titulo-view" style="color: #0056b3; margin-bottom: 20px;"></h3>
                     <div class="horario-img-container">
                         <img id="horario-img-src" src="" alt="Horario">
                     </div>
-                    <button class="btn-volver-horario" onclick="cerrarHorario()">
-                        <span>&#8592;</span> Volver a Horarios
+                    <button class="btn-volver-horario" onclick="volverADiasHorario()">
+                        <span>&#8592;</span> Volver a Días
                     </button>
                 </div>
             </div>
@@ -455,152 +509,146 @@
                     <div class="comite-card prepa-card">
                         <h3>UNICEF</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/unicef-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/UNICEF-PREPARATORIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('UNICEF (Prepa)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card prepa-card">
                         <h3>UNICEF II</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/unicef2-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/UNICEF-II-PREPARATORIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('UNICEF II (Prepa)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card prepa-card">
                         <h3>UNESCO</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/unesco-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/UNESCO-PREPARATORIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('UNESCO (Prepa)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card prepa-card">
                         <h3>ONU Mujeres</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/onumujeres-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/ONU-MUJERES-PREPARATORIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('ONU Mujeres (Prepa)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card prepa-card">
                         <h3>ONU Mujeres II</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/onumujeres2-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/ONU-MUJERES-II-PREPARATORIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('ONU Mujeres II (Prepa)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card prepa-card">
                         <h3>ACNUR</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/acnur-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/ACNUR-PREPARATORIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('ACNUR (Prepa)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card prepa-card">
                         <h3>OMS</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/oms-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/OMS-PREPARATORIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('OMS (Prepa)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card prepa-card">
                         <h3>PNUMA</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/pnuma-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/PNUMA-PREPARATORIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('PNUMA (Prepa)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card prepa-card">
                         <h3>UNODC</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/unodc-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/UNODC-PREPARATORIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('UNODC (Prepa)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card prepa-card">
                         <h3>FAO</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/fao-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/FAO-PREPARATORIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('FAO (Prepa)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card prepa-card">
                         <h3>PNUD</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/pnud-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/PNUD-PREPARATORIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('PNUD (Prepa)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card prepa-card">
                         <h3>COPUOS</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/copuos-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/COPUOS-PREPARATORIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('COPUOS (Prepa)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card prepa-card">
                         <h3>UNHCR</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/unhcr-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/UNHCR-PREPARATORIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('UNHCR (Prepa)')">Conoce a tu mesa</button>
-                    </div>
-                    <div class="comite-card prepa-card">
-                        <h3>WHO</h3>
-                        <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/who-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
-                        <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('WHO (Prepa)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card prepa-card">
                         <h3>Crisis</h3>
                         <p class="comite-code">Preparatoria</p>
-                        <a href="documentos/crisis-prepa.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/CRISIS.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('Crisis (Prepa)')">Conoce a tu mesa</button>
                     </div>
 
                     <div class="comite-card secu-card" style="display:none;">
                         <h3>UNICEF</h3>
                         <p class="comite-code">Secundaria</p>
-                        <a href="documentos/unicef-secu.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/UNICEF-SECUNDARIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('UNICEF (Secundaria)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card secu-card" style="display:none;">
                         <h3>UNICEF II</h3>
                         <p class="comite-code">Secundaria</p>
-                        <a href="documentos/unicef2-secu.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/UNICEF-II-SECUNDARIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('UNICEF II (Secundaria)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card secu-card" style="display:none;">
                         <h3>ONU Mujeres</h3>
                         <p class="comite-code">Secundaria</p>
-                        <a href="documentos/onumujeres-secu.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/ONU-MUJERES-SECUNDARIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('ONU Mujeres (Secundaria)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card secu-card" style="display:none;">
                         <h3>ONU Mujeres II</h3>
                         <p class="comite-code">Secundaria</p>
-                        <a href="documentos/onumujeres2-secu.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/ONU-MUJERES-II-SECUNDARIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('ONU Mujeres II (Secundaria)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card secu-card" style="display:none;">
                         <h3>UNESCO</h3>
                         <p class="comite-code">Secundaria</p>
-                        <a href="documentos/unesco-secu.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/UNESCO-SECUNDARIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('UNESCO (Secundaria)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card secu-card" style="display:none;">
                         <h3>ACNUR</h3>
                         <p class="comite-code">Secundaria</p>
-                        <a href="documentos/acnur-secu.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/ACNUR-SECUNDARIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('ACNUR (Secundaria)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card secu-card" style="display:none;">
                         <h3>PNUMA</h3>
                         <p class="comite-code">Secundaria</p>
-                        <a href="documentos/pnuma-secu.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/PNUMA-SECUNDARIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('PNUMA (Secundaria)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card secu-card" style="display:none;">
                         <h3>UNODC</h3>
                         <p class="comite-code">Secundaria</p>
-                        <a href="documentos/unodc-secu.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/UNODC-SECUNDARIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('UNODC (Secundaria)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card secu-card" style="display:none;">
                         <h3>UNHCR</h3>
                         <p class="comite-code">Secundaria</p>
-                        <a href="documentos/unhcr-secu.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/UNHCR-SECUNDARIA.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('UNHCR (Secundaria)')">Conoce a tu mesa</button>
                     </div>
                     <div class="comite-card secu-card" style="display:none;">
                         <h3>Crisis</h3>
                         <p class="comite-code">Secundaria</p>
-                        <a href="documentos/crisis-secu.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
+                        <a href="documentos/CRISIS.pdf" download class="btn-comite-action" style="text-decoration:none; display:inline-block; text-align:center;">Documentos de Tópico</a>
                         <button class="btn-comite-action secondary" onclick="abrirMesaDetalle('Crisis (Secundaria)')">Conoce a tu mesa</button>
                     </div>
                 </div>
@@ -610,7 +658,13 @@
                 <h2 id="mesa-titulo-comite" style="color: #0056b3; margin-bottom: 5px; text-align: center;">Mesa Directiva</h2>
                 <p style="color: #64748b; text-align: center; margin-bottom: 25px;">Integrantes de la mesa a cargo del debate.</p>
                 
-                <div id="mesa-roles-container" class="mesa-roles-row"></div>
+                <!-- Foto Centrada Grande -->
+                <div class="mesa-banner-container">
+                    <img id="mesa-foto-principal" src="MESA.png" alt="Mesa Directiva Comité" class="mesa-main-photo">
+                </div>
+
+                <!-- Lista organizada en Grid 2x2 para ubicar el Oficial de Conferencias debajo del Moderador -->
+                <div id="mesa-roles-container" class="mesa-names-grid"></div>
 
                 <div style="text-align: center; margin-top: 30px;">
                     <button class="btn-volver-horario" onclick="cerrarMesaDetalle()" style="padding: 10px 25px; cursor: pointer;">← Volver a Comités</button>
@@ -765,12 +819,15 @@
                 </div>
 
                 <div class="gallery-buttons" style="display:flex; justify-content:center; gap:15px; margin-top:25px; flex-wrap:wrap;">
-                    <a href="documentos/guia-redaccion.pdf" download="Guia_Redaccion_MUNMX.pdf" class="btn-gallery" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+                    <a href="documentos/GENMUNMXGuiaRedaccion.pdf" download="GENMUNMXGuiaRedaccion.pdf" class="btn-gallery" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
                         <span class="btn-icon">📄</span> Guía de Redacción
                     </a>
                     
-                  <a href="documentos/ProtocoloGeneralMUNMx26.pdf"" download="ProtocoloGeneralMUNMx26.pdf" class="btn-gallery" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+                  <a href="documentos/ProtocoloGeneralMUNMx26.pdf" download="ProtocoloGeneralMUNMx26.pdf" class="btn-gallery" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
                       <span class="btn-icon">📋</span> Protocolo
+                  </a>
+                  <a href="documentos/CodVestimenta.pdf" download="CodVestimenta.pdf" class="btn-gallery" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+                      <span class="btn-icon">🤵🏻</span> Código de Vestimenta
                   </a>
 
                 </div>
@@ -821,161 +878,238 @@
     <script>
         const seccionesIds = ['inicio', 'horarios', 'comites', 'secretaria', 'galeria', 'personaje', 'MunDay'];
 
-        // Base de datos de integrantes de Mesa Directiva para CADA comité individual
+       
         const mesasPorComite = {
-            "UNICEF (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "UNICEF II (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "UNESCO (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "ONU Mujeres (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "ONU Mujeres II (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "ACNUR (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "OMS (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "PNUMA (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "UNODC (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "FAO (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "PNUD (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "COPUOS (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "UNHCR (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "WHO (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "Crisis (Prepa)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "UNICEF (Secundaria)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "UNICEF II (Secundaria)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "ONU Mujeres (Secundaria)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "ONU Mujeres II (Secundaria)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "UNESCO (Secundaria)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "ACNUR (Secundaria)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "PNUMA (Secundaria)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "UNODC (Secundaria)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "UNHCR (Secundaria)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ],
-            "Crisis (Secundaria)": [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ]
+            "UNICEF (Prepa)": {
+                fotoMesa: "UNICEF1.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Valentina Castañeda Salinas" },
+                    { rol: "Moderador(a)", nombre: "Danna Valentina Galván Yépez" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Tania Patricia Hernández Garrido" },
+                    { rol: "Oficial de Conferencias", nombre: "Emily Tanith Olvera Anaya" }
+                ]
+            },
+            "UNICEF II (Prepa)": {
+                fotoMesa: "UNICEF2.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Frida Álvarez Bejarano" },
+                    { rol: "Moderador(a)", nombre: "Sofia Bravo Acevedo" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Mario Andrée Vera Barrera" },
+                    { rol: "Oficial de Conferencias", nombre: "Emily Tanith Olvera Anaya" }
+                ]
+            },
+            "UNESCO (Prepa)": {
+                fotoMesa: "UNESCO1.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Camila Constanza Argüello López " },
+                    { rol: "Moderador(a)", nombre: "Luciana Isabella Alvarado Cabello" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Simón Aquiles Paredes Villegas " },
+                    { rol: "Oficial de Conferencias", nombre: "Jesús Emiliano Vera Contreras" }
+                ]
+            },
+            "ONU Mujeres (Prepa)": {
+                fotoMesa: "ONUMUJ1.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Alberto Jiménez Camacho" },
+                    { rol: "Moderador(a)", nombre: "Rodrigo Diaz Santos" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Javier Cornejo Conde" },
+                    { rol: "Oficial de Conferencias", nombre: "Axli López Unzon" }
+                ]
+            },
+            "ONU Mujeres II (Prepa)": {
+                fotoMesa: "ONUMUJ2.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Ximena Karin Chávez Gonzales" },
+                    { rol: "Moderador(a)", nombre: "Silvia Sophia Morin Hidalgo" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Valentina Trejo Espinoza " },
+                    { rol: "Oficial de Conferencias", nombre: "Samantha Suárez Gordillo" },
+                ]
+            },
+            "ACNUR (Prepa)": {
+                fotoMesa: "ACNUR1.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Iker Monterde Valencia" },
+                    { rol: "Moderador(a)", nombre: "Santiago Sánchez Gómez" },
+                    { rol: "Moderador(a) Adjunto", nombre: "María José Hernández Hernández " },
+                    { rol: "Oficial de Conferencias", nombre: "Gloria Natalia Amaya Velasco " }
+                ]
+            },
+            "OMS (Prepa)": {
+                fotoMesa: "OMS.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Santago Morales Barbosa" },
+                    { rol: "Moderador(a)", nombre: "Diego de Jesús Medina" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Mariann González Bustos" },
+                    { rol: "Oficial de Conferencias", nombre: "Emilio Sebastian Sánchez Medina" }
+                ]
+            },
+            "PNUMA (Prepa)": {
+                fotoMesa: "PNUMA1.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Marcela Garza Martinez" },
+                    { rol: "Moderador(a)", nombre: "Mariana Garza Martínez " },
+                    { rol: "Moderador(a) Adjunto", nombre: "Santiago Gracia Hernández" },
+                    { rol: "Oficial de Conferencias", nombre: "Ximena Cruz Blancas " }
+                ]
+            },
+            "UNODC (Prepa)": {
+                fotoMesa: "UNODC1.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Erick Jacob Vera Arteaga" },
+                    { rol: "Moderador(a)", nombre: "Anthony Alexis Cruz Blancas" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Marcos Souverbille Flores" },
+                    { rol: "Oficial de Conferencias", nombre: "Rodrigo Torres Vázquez" },
+                ]
+            },
+            "FAO (Prepa)": {
+                fotoMesa: "FAO.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Gianluca Coccaro Aguilera  " },
+                    { rol: "Moderador(a)", nombre: "Julian Suarez Osorio" },
+                    { rol: "Moderador(a) Adjunto", nombre: "María Galindo Hernández." },
+                    { rol: "Oficial de Conferencias", nombre: "José Mateo González Cuatepotzo" }
+                ]
+            },
+            "PNUD (Prepa)": {
+                fotoMesa: "PNUD.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Andrea Mejía Baños" },
+                    { rol: "Moderador(a)", nombre: "Manuela Peredo Rodríguez " },
+                    { rol: "Moderador(a) Adjunto", nombre: "Javier Guillén Conde" },
+                    { rol: "Oficial de Conferencias", nombre: "Paulina Montaño Briseño " }
+                ]
+            },
+            "COPUOS (Prepa)": {
+                fotoMesa: "COPUOS.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Manuel Ortega Barberena" },
+                    { rol: "Moderador(a)", nombre: "Mauricio Pérez Maauad" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Fernando Remes Noriega" },
+                    { rol: "Oficial de Conferencias", nombre: "Constanza Martínez Ozumbilla" }
+                ]
+            },
+            "UNHCR (Prepa)": {
+                fotoMesa: "UNHCR1.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Melissa Espinoza Tellez" },
+                    { rol: "Moderador(a)", nombre: "Zoe Victoria Rico Alonso" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Elian Sebastián Sánchez Hernandez" },
+                    { rol: "Oficial de Conferencias", nombre: "Santiago Aubert Hernandez Mendoza" }
+                ]
+            },
+            "WHO (Prepa)": {
+                fotoMesa: "MESA.png",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Gian Lucca Jaramillo Candaudap" },
+                    { rol: "Moderador(a)", nombre: "Karol Gabriela López Cruz" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Fátima Basañez Lamont" },
+                    { rol: "Oficial de Conferencias", nombre: "Estefanía Aguirre Camacho" }
+                ]
+            },
+            "Crisis (Prepa)": {
+                fotoMesa: "CRISIS1.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Allegra Maya Rapp González" },
+                    { rol: "Moderador(a)", nombre: "Andrea Christina de la Fuente Fernández" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Victoria Itzet Hernández García" },
+                    { rol: "Oficial de Conferencias", nombre: "Valeria Zoé Germán Velázquez " }
+                ]
+            },
+            "UNICEF (Secundaria)": {
+                fotoMesa: "UNICEF.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Alexa Corona Lamont" },
+                    { rol: "Moderador(a)", nombre: "Miguel Angel Granillo Flores" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Diego André Muñoz Rodríguez" },
+                    { rol: "Oficial de Conferencias", nombre: " Oscar André de las Cuevas Licona" }
+                ]
+            },
+            "UNICEF II (Secundaria)": {
+                fotoMesa: "UNICEFII.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Alondra Lisset Vargas Ramírez " },
+                    { rol: "Moderador(a)", nombre: "Alysson Gómez Iglesias " },
+                    { rol: "Moderador(a) Adjunto", nombre: "Dulce Jamileth Delgadillo Romo" },
+                    { rol: "Oficial de Conferencias", nombre: "Valeria Angelica Garcia Zepeda  " }
+                ]
+            },
+            "ONU Mujeres (Secundaria)": {
+                fotoMesa: "ONUMUJ.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Paula Gretel Corona Gallegos" },
+                    { rol: "Moderador(a)", nombre: "Sarahi Cruz Viveros" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Sofia Xilonen Cano Sanchez" },
+                    { rol: "Oficial de Conferencias", nombre: "Valentina Manzanarez Ocampo" }
+                ]
+            },
+            "ONU Mujeres II (Secundaria)": {
+                fotoMesa: "ONUMU.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Renata Mora Lavalley" },
+                    { rol: "Moderador(a)", nombre: "Amilcar Iktan Vargas Alejandre" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Andrés Eduardo Garza Fernández" },
+                    { rol: "Oficial de Conferencias", nombre: "Leonardo Vera Samperio" }
+                ]
+            },
+            "UNESCO (Secundaria)": {
+                fotoMesa: "UNESCO.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Sophia Regina Espinosa Hernández" },
+                    { rol: "Moderador(a)", nombre: "Constanza Monzalvo Carrillo" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Sylvana Baños Espinosa" },
+                    { rol: "Oficial de Conferencias", nombre: "Alan Patricio Tapia Palomino " }
+                ]
+            },
+            "ACNUR (Secundaria)": {
+                fotoMesa: "ACNUR.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Kavi Alessandro Rodríguez Zamora" },
+                    { rol: "Moderador(a)", nombre: "Santiago Toledo Cruz" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Yeshua José Alfredo Sánchez Nochebuena" },
+                    { rol: "Oficial de Conferencias", nombre: "Sebastian Romero Delgadillo" }
+                ]
+            },
+            "PNUMA (Secundaria)": {
+                fotoMesa: "PNUMA.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Hamid Leonardo Sosa Vite" },
+                    { rol: "Moderador(a)", nombre: "Ana Luisa Cornejo Conde" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Fernanda Gómez Vargas" },
+                    { rol: "Oficial de Conferencias", nombre: "Jaanai Bautista Bernal" }
+                ]
+            },
+            "UNODC (Secundaria)": {
+                fotoMesa: "UNODC.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Bezaleel Gutiérrez Sánchez" },
+                    { rol: "Moderador(a)", nombre: "Natalia Navarrete Ramirez" },
+                    { rol: "Moderador(a) Adjunto", nombre: "René Lander Carvajal Valencia " },
+                    { rol: "Oficial de Conferencias", nombre: "Erick Jesús Vazquez Martínez" }
+                ]
+            },
+            "UNHCR (Secundaria)": {
+                fotoMesa: "UNHCR.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Diego Rodríguez Ibarra" },
+                    { rol: "Moderador(a)", nombre: "Miguel Ángel García Hernández " },
+                    { rol: "Moderador(a) Adjunto", nombre: "Kimberly Naomi Mercado Pérez" },
+                    { rol: "Oficial de Conferencias", nombre: "Lian Mayer Calva" },
+                ]
+            },
+            "Crisis (Secundaria)": {
+                fotoMesa: "CRISIS.jpg",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Karla Paola Vargas Ramírez" },
+                    { rol: "Moderador(a)", nombre: "Ana Paola Armenta Rodríguez" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Ximena Danae Romero Anaya " },
+                    { rol: "Oficial de Conferencias", nombre: "Mia Guadalupe Del Razo Arias" }
+                ]
+            }
         };
 
         function navegar(idObjetivo) {
+            window.scrollTo(0, 0);
+
             seccionesIds.forEach(id => {
                 const elem = document.getElementById(id);
                 if (elem) elem.style.display = 'none';
@@ -986,11 +1120,11 @@
                 destino.style.display = 'block';
             }
 
-            cerrarHorario();
+            cerrarHorariosTotal();
             cerrarMesaDetalle();
             cerrarIndice();
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'instant' });
         }
 
         // Modal Índice
@@ -1002,32 +1136,63 @@
             document.getElementById('index-modal').style.display = 'none';
         }
 
-        // Sub-vista Horarios
-        function abrirHorario(tipo) {
-            const mapa = {
-                'secretaria': { titulo: 'Horario - Secretaría General', src: 'horario-secretaria.jpg' },
-                'mesa': { titulo: 'Horario - Mesas Directivas', src: 'horario-mesa.jpg' },
-                'delegados': { titulo: 'Horario - Delegados', src: 'horario-delegados.jpg' }
-            };
+        
+        let subramaHorarioActual = '';
 
-            if (mapa[tipo]) {
-                document.getElementById('horario-titulo-view').innerText = mapa[tipo].titulo;
-                document.getElementById('horario-img-src').src = mapa[tipo].src;
-                document.getElementById('horarios-lista-main').style.display = 'none';
+        const mapaHorarios = {
+            secundaria: {
+                titulo: 'Secundaria',
+                1: { titulo: 'Horario Secundaria - Día 1', src: '5-1.jpeg' },
+                2: { titulo: 'Horario Secundaria - Día 2', src: '6-1.jpeg' },
+                3: { titulo: 'Horario Secundaria - Día 3', src: '7-1.jpeg' }
+            },
+            preparatoria: {
+                titulo: 'Preparatoria',
+                1: { titulo: 'Horario Preparatoria - Día 1', src: '5-1.jpeg' },
+                2: { titulo: 'Horario Preparatoria - Día 2', src: '6-2.jpeg' },
+                3: { titulo: 'Horario Preparatoria - Día 3', src: '7-2.jpeg' }
+            }
+        };
+
+        function seleccionarSubramaHorario(subrama) {
+            subramaHorarioActual = subrama;
+            document.getElementById('horario-subrama-titulo').innerText = `Horarios ${mapaHorarios[subrama].titulo}`;
+            
+            document.getElementById('horarios-secciones-main').style.display = 'none';
+            document.getElementById('horarios-dias-index').style.display = 'flex';
+            document.getElementById('horario-detalle-view').style.display = 'none';
+        }
+
+        function mostrarImagenHorario(dia) {
+            if (subramaHorarioActual && mapaHorarios[subramaHorarioActual][dia]) {
+                const infoHorario = mapaHorarios[subramaHorarioActual][dia];
+                document.getElementById('horario-titulo-view').innerText = infoHorario.titulo;
+                document.getElementById('horario-img-src').src = infoHorario.src;
+                
+                document.getElementById('horarios-dias-index').style.display = 'none';
                 document.getElementById('horario-detalle-view').style.display = 'block';
             }
         }
 
-        function cerrarHorario() {
-            const listMain = document.getElementById('horarios-lista-main');
-            const detailView = document.getElementById('horario-detalle-view');
-            if (listMain && detailView) {
-                listMain.style.display = 'flex';
-                detailView.style.display = 'none';
-            }
+        function volverASeccionesHorario() {
+            document.getElementById('horarios-secciones-main').style.display = 'flex';
+            document.getElementById('horarios-dias-index').style.display = 'none';
+            document.getElementById('horario-detalle-view').style.display = 'none';
         }
 
-        // Filtrado de Comités (Prepa / Secu)
+        function volverADiasHorario() {
+            document.getElementById('horarios-dias-index').style.display = 'flex';
+            document.getElementById('horario-detalle-view').style.display = 'none';
+        }
+
+        function cerrarHorariosTotal() {
+            subramaHorarioActual = '';
+            document.getElementById('horarios-secciones-main').style.display = 'flex';
+            document.getElementById('horarios-dias-index').style.display = 'none';
+            document.getElementById('horario-detalle-view').style.display = 'none';
+        }
+
+        // Filtrado de Comités
         function filtrarComites(categoria) {
             const prepaCards = document.querySelectorAll('.prepa-card');
             const secuCards = document.querySelectorAll('.secu-card');
@@ -1047,28 +1212,35 @@
             }
         }
 
-        // Sub-vista Comités con renderizado específico por comité
+       
         function abrirMesaDetalle(nombreComite) {
             document.getElementById('comites-main').style.display = 'none';
             document.getElementById('mesa-titulo-comite').textContent = `Mesa Directiva - ${nombreComite}`;
             
             const rolesContainer = document.getElementById('mesa-roles-container');
-            const listaIntegrantes = mesasPorComite[nombreComite] || [
-                { rol: "Presidente(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Moderador(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Secretario(a)", nombre: "Por asignar", foto: "ONU.png" },
-                { rol: "Oficial de Logística", nombre: "Por asignar", foto: "ONU.png" }
-            ];
+            const fotoImg = document.getElementById('mesa-foto-principal');
+            
+            const datosComite = mesasPorComite[nombreComite] || {
+                fotoMesa: "MESA.png",
+                integrantes: [
+                    { rol: "Presidente(a)", nombre: "Por asignar" },
+                    { rol: "Moderador(a)", nombre: "Por asignar" },
+                    { rol: "Oficial de Conferencias", nombre: "Por asignar" },
+                    { rol: "Moderador(a) Adjunto", nombre: "Por asignar" }
+                ]
+            };
 
-            rolesContainer.innerHTML = listaIntegrantes.map(miembro => `
-                <div class="mesa-member-card">
-                    <img src="${miembro.foto}" alt="${miembro.rol}">
+            fotoImg.src = datosComite.fotoMesa;
+
+            rolesContainer.innerHTML = datosComite.integrantes.map(miembro => `
+                <div class="mesa-name-card">
                     <h4>${miembro.rol}</h4>
                     <p>${miembro.nombre}</p>
                 </div>
             `).join('');
 
             document.getElementById('comite-mesa-detalle').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'instant' });
         }
 
         function cerrarMesaDetalle() {
